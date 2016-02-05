@@ -7,9 +7,14 @@ RUN usermod -u 1000 www-data
 RUN usermod -G staff www-data
 
 RUN echo Europe/Berlin | tee /etc/timezone && dpkg-reconfigure --frontend noninteractive tzdata
-
-RUN apt-get update
-RUN apt-get install -y nano wget dialog net-tools curl git supervisor nginx php5-fpm php5-cli php5-mysql mysql-client
+RUN apt-get update && \
+    apt-get install -y wget
+RUN echo 'deb http://packages.dotdeb.org wheezy-php55 all' >> /etc/apt/sources.list && \
+    echo 'deb-src http://packages.dotdeb.org wheezy-php55 all' >> /etc/apt/sources.list && \
+    wget http://www.dotdeb.org/dotdeb.gpg && \
+    cat dotdeb.gpg | apt-key add - && \
+    apt-get update && \
+    apt-get install -y nano dialog net-tools curl git supervisor nginx php5-fpm php5-cli php5-mysql mysql-client
 
 ADD nginx.conf /etc/nginx/nginx.conf
 
