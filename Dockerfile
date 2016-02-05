@@ -17,8 +17,10 @@ RUN echo 'deb http://packages.dotdeb.org wheezy-php55 all' >> /etc/apt/sources.l
     apt-get install -y nano dialog net-tools curl git supervisor nginx php5-fpm php5-cli php5-mysql mysql-client
 
 ADD nginx.conf /etc/nginx/nginx.conf
-
 ADD default.conf /etc/nginx/conf.d/default.conf
+
+RUN ln -sf /dev/stdout /var/log/nginx/access.log
+RUN ln -sf /dev/stderr /var/log/nginx/error.log
 
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 RUN chown root:root /etc/supervisor/conf.d/supervisord.conf
