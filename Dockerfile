@@ -14,7 +14,7 @@ RUN echo 'deb http://packages.dotdeb.org wheezy-php55 all' >> /etc/apt/sources.l
     wget http://www.dotdeb.org/dotdeb.gpg && \
     cat dotdeb.gpg | apt-key add - && \
     apt-get update && \
-    apt-get install -y nano dialog net-tools curl git supervisor nginx php5-fpm php5-cli php5-mysql mysql-client
+    apt-get install -y nano dialog net-tools curl git supervisor nginx php5-fpm php5-cli php5-mysql mysql-client php5-ldap
 
 ADD nginx.conf /etc/nginx/nginx.conf
 ADD default.conf /etc/nginx/conf.d/default.conf
